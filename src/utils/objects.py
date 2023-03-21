@@ -126,8 +126,9 @@ class Hitbox(BaseObject):
         self.debug_col = (255,0,0,0.5)
         self.debug_style = 2
 
-    def update():
-        pass
+    def update(self):
+        self.x += self.x_vel        # Updating position
+        self.y += self.y_vel
 
     def draw(self):
         if self.debug:

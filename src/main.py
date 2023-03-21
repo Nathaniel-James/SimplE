@@ -7,7 +7,7 @@ WIDTH = 800
 HEIGHT = 600
 BG_COLOR = (0, 0, 0)
 SCENES = {
-    "main_menu": scenes.MainMenu
+    "main_menu": scenes.ExampleScene
 }
 
 # Pygame setup

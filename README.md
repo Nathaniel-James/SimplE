@@ -2,7 +2,7 @@
 ## Description
 Boilerplate code for Pygame which intends to provide developers some utility when developing their Pygame projects. 
 
-Originally this was intended to be a snake game, but I ended up writing more boilerplate code than actual gameplay. 
+Originally this was intended to be a snake game. I started following various tutorials, but I ended up writing more boilerplate code than actual gameplay. So I transformed the project into this. I am new to SDL/Pygame, so I'm always looking for optimisations.
 
 Some of this was developed with a particular school project in mind. There may be some certain odd design choices due to this - if I keep maintaining this project in Python then I will iron these out later on. However, I have been considering switching this project over to Rust once I have a better grasp of that language.
 
