@@ -12,6 +12,11 @@ class BaseObject:
     width = 0
     height = 0
 
+    rect = pygame.Rect(x, y, width, height)
+
+    def _update_hb(self):
+        self.rect.update(self.x, self.y, self.width, self.height)
+
     def __init__(self, screen):
         self.screen = screen
 
@@ -26,6 +31,8 @@ class BaseObject:
     def set_size(self, width, height):
         self.width = width
         self.height = height
+
+        self._update_hb()
 
     def set_vel(self, x_velocity, y_velocity):
         self.x_vel = x_velocity
@@ -88,6 +95,8 @@ class Image(BaseObject):
         self.x += self.x_vel
         self.y += self.y_vel
 
+        self._update_hb()
+
     def draw(self):
         self.screen.blit(self.surface,(self.x,self.y))
 
@@ -107,6 +116,8 @@ class Animation(BaseObject):
     def update(self):
         self.x += self.x_vel        # Updating position
         self.y += self.y_vel
+
+        self._update_hb()
     
         if self.frame_delta >= self.framerate:
             self.frame_delta = 0                                              # Resetting frame count
@@ -130,13 +141,21 @@ class Hitbox(BaseObject):
         self.x += self.x_vel        # Updating position
         self.y += self.y_vel
 
+        self._update_hb()
+
     def draw(self):
         if self.debug:
-            pygame.draw.rect(self.screen, self.debug_col, pygame.Rect(self.x, self.y, self.width, self.height), self.debug_style)
-
+            pygame.draw.rect(self.screen, self.debug_col, self.rect, self.debug_style)
 
 # Object method
+def hb_collision(obj_1, obj_2):
+    return obj_1.colliderect(obj_2)
 
-def collision(*args):
-    # Checks collision across a wide range of groups
-    pass
+def point_collision(obj, x, y):
+    return obj.rect.collidepoint(x, y)
+
+# Mouse methods
+def get_mouse_pos():
+    if pygame.mouse.get_focused():
+        return pygame.mouse.get_pos()
+    return (-1, -1)

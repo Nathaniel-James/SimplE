@@ -79,8 +79,6 @@ class SceneManager:
         if len(self.stack) > 0:
             self.stack[-1].draw(self)
 
-        pygame.display.flip()
-
 
 class ExampleScene(BaseScene): # Will not run
     def __init__(self, parent):
@@ -93,7 +91,12 @@ class ExampleScene(BaseScene): # Will not run
         self.player = objects.Hitbox(self.screen)
         self.player.set_size(50,50)
         self.player.debug = True
-        self.player.framerate = 1
+        
+        self.hb = objects.Hitbox(self.screen)
+        self.hb.set_size(25,25)
+        self.hb.debug = True
+
+        self.hb.place(100,100)
 
     def on_enter(self):
         print("ExampleScene loaded")
@@ -117,11 +120,20 @@ class ExampleScene(BaseScene): # Will not run
             self.player.x_vel = 0
 
     def update(self, sm, input_stream):
+        self.hb.update()
         self.player.update()
+
+        x, y = objects.get_mouse_pos()
+
+        # if objects.point_collision(self.player, x, y):
+        #     print("Mouse collision")
+        if objects.hb_collision(self.player.rect, self.hb.rect):
+            print(f"player {self.player.x}, {self.player.y}, {self.player.width}, {self.player.height} ||| hb {self.hb.x}, {self.hb.y}, {self.hb.width}, {self.hb.height}")
 
     def draw(self, sm):
         self.screen.fill((0,0,0))
 
-        self.title.draw()
-        self.subtitle.draw()
+        # self.title.draw()
+        # self.subtitle.draw()
         self.player.draw()
+        self.hb.draw()

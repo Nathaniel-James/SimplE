@@ -42,6 +42,7 @@ while running:
     scene_manager.input(input_manager)
     scene_manager.update(input_manager, events)
     scene_manager.draw() 
+    pygame.display.flip()
 
     clock.tick(120)
 
